@@ -168,7 +168,7 @@ if($_POST['submit']!=""){
                             <div class="formgroup"><input type="text" name="pin" placeholder="Locality / Property Name" required/></div>
                             <div class="formgroup"><textarea name="message" id="" cols="30" rows="4" placeholder="Message"></textarea></div>
                             <div class="formgroup text-center">
-                                <div class="g-recaptcha" data-sitekey="(6LfFZnEgAAAAAOUnLAliQ4A_qxOh4R-H2hC-k3Ox)"></div>
+                                <div class="g-recaptcha" data-sitekey="(6LfH1nUgAAAAAHv7q6mP9mMJxi37WrWZLVSdwu-q)"></div>
                                 <button type="submit" name="submit" value="SEND" id="form-submit" onclick="checkRecaptcha();">SEND</button></div>
                              <span class="error"> <?php echo $nameErr;?></span>
                              </form>
@@ -638,7 +638,7 @@ if($_POST['sendform']!=""){
                 $.ajax({
                     type: "POST",
                     url: 'https://www.google.com/recaptcha/api/siteverify',
-                    data: {"secret" : "(6LfFZnEgAAAAAAAS7b-0dbt_0kUiVFlZRdkdTbrZ)", "response" : response, "remoteip":"localhost"},
+                    data: {"secret" : "(6LfH1nUgAAAAAD4svJSUFLUTYYT3GnnYyi6PWhoF)", "response" : response, "remoteip":"localhost"},
                     contentType: 'application/x-www-form-urlencoded',
                     success: function(data) { console.log(data); }
                 });
