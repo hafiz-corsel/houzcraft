@@ -25,6 +25,8 @@
         
        <!-- Global site tag (gtag.js) - Google Ads: 10895210738 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10895210738"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -165,7 +167,9 @@ if($_POST['submit']!=""){
                             </div>
                             <div class="formgroup"><input type="text" name="pin" placeholder="Locality / Property Name" required/></div>
                             <div class="formgroup"><textarea name="message" id="" cols="30" rows="4" placeholder="Message"></textarea></div>
-                            <div class="formgroup text-center"><button type="submit" name="submit" value="SEND" id="form-submit">SEND</button></div>
+                            <div class="formgroup text-center">
+                                <div class="g-recaptcha" data-sitekey="(6LfFZnEgAAAAAOUnLAliQ4A_qxOh4R-H2hC-k3Ox)"></div>
+                                <button type="submit" name="submit" value="SEND" id="form-submit" onclick="checkRecaptcha();">SEND</button></div>
                              <span class="error"> <?php echo $nameErr;?></span>
                              </form>
                         </div>
@@ -615,6 +619,31 @@ if($_POST['sendform']!=""){
                 responsive: { 0: { items: 1 }, 600: { items: 1 }, 1000: { items: 2 } },
             });
         </script>
+        <script> 
+            function checkRecaptcha() {
+              var response = grecaptcha.getResponse();
+              if(response.length == 0) { 
+                //reCaptcha not verified
+                alert("no pass"); 
+              }
+              else { 
+                //reCaptch verified
+                alert("pass"); 
+              }
+            }
+            
+            // implement on the backend
+            function backend_API_challenge() {
+                var response = grecaptcha.getResponse();
+                $.ajax({
+                    type: "POST",
+                    url: 'https://www.google.com/recaptcha/api/siteverify',
+                    data: {"secret" : "(6LfFZnEgAAAAAAAS7b-0dbt_0kUiVFlZRdkdTbrZ)", "response" : response, "remoteip":"localhost"},
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function(data) { console.log(data); }
+                });
+            }
+            </script>
         <script>
             $(".haveqa .owl-carousel").owlCarousel({
                 loop: true,
